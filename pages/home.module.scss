@@ -1,0 +1,42 @@
+.home {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titleHome {
+    font-family: Poppins;
+    text-align: center;
+    font-size: 2.6rem;
+
+    margin: 3rem 0;
+}
+
+.titleHome::after {
+    content: '';
+    width: 280px;
+    height: 4px;
+    background-color: #000;
+    display: block;
+    margin: 0 auto;
+}
+
+.news {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.articleNew {
+
+    background-color: var(--white-300);
+    padding: 2rem 1rem;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.10);
+    
+    h1 {
+        font-family: Merriweather;
+        font-size: 1.6rem;
+    }
+
+    p {
+        margin-top: 1rem;
+    }
+}

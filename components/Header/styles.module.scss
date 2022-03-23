@@ -1,0 +1,32 @@
+.header {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+.headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    nav {
+
+        gap: 1rem;
+
+        a {
+            font-size: 1.4rem;
+        }
+
+    }
+}
+
+.signUp {
+    color: var(--white-1000);
+    background-color: var(--black-1000);
+
+    padding: 0.6rem 1rem;
+    margin-left: 2rem;
+}
