@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 
 import styles from './home.module.scss'
+import Link from "next/link"
 
 export default function Home() {
 
@@ -33,16 +34,19 @@ export default function Home() {
 				<h1 className={styles.titleHome} >Últimas notícias</h1>
 
 				<section className={styles.news} >
-					<article className={styles.articleNew} >
-						<h1>Survivors Emerge From  Bombed Theater in Southern Ukraine</h1>
-						<p>
-							Workers were rescuing survivors
-							from a theater in Mariupol that
-							was sheltering hundreds, including
-							children, as Russia increasingly targeted urban centers.
-							A fourth consecutive day of peace talks yielded no announcements, and the U.N. Security Council held an emergency session. Here’s the latest.
-						</p>
-					</article>
+					<Link href="/post" >
+						<article className={styles.articleNew} >
+
+							<h1>Survivors Emerge From  Bombed Theater in Southern Ukraine</h1>
+							<p>
+								Workers were rescuing survivors
+								from a theater in Mariupol that
+								was sheltering hundreds, including
+								children, as Russia increasingly targeted urban centers.
+								A fourth consecutive day of peace talks yielded no announcements, and the U.N. Security Council held an emergency session. Here’s the latest.
+							</p>
+						</article>
+					</ Link >
 				</section>
 			</main>
 
