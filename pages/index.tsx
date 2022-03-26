@@ -5,15 +5,29 @@ import axios from 'axios'
 import styles from './home.module.scss'
 import Link from "next/link"
 
+interface News {
+	headline: {
+		main: string;
+	}
+
+	lead_paragraph: string;
+	snippet: string;
+}
+
+
+
 export default function Home() {
 
 	const [term, setTerm] = useState('everything')
+	const [news, setNews] = useState<News[]>([])
+	
 
 	useEffect(() => {
 
 		axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
 			.then((response) => {
-				console.log(response.data)
+				setNews(response.data.response.docs)
+
 			})
 			.catch((err) => {
 				console.log(err)
@@ -34,21 +48,19 @@ export default function Home() {
 				<h1 className={styles.titleHome} >Últimas notícias</h1>
 
 				<section className={styles.news} >
-					<Link href="/post" >
-						<article className={styles.articleNew} >
+					{news.map((newValue, key) => (
+						<article key={key} className={styles.articleNew} >
 
-							<h1>Survivors Emerge From  Bombed Theater in Southern Ukraine</h1>
+							<h1>{newValue.headline.main}</h1>
 							<p>
-								Workers were rescuing survivors
-								from a theater in Mariupol that
-								was sheltering hundreds, including
-								children, as Russia increasingly targeted urban centers.
-								A fourth consecutive day of peace talks yielded no announcements, and the U.N. Security Council held an emergency session. Here’s the latest.
+								{newValue.snippet}
 							</p>
 						</article>
-					</ Link >
+					))}
 				</section>
 			</main>
+
+
 
 		</>
 	)

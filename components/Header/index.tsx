@@ -1,6 +1,7 @@
 import styles from './styles.module.scss'
 
 import Link from 'next/link'
+import { SignInButton } from '../SignInButton'
 
 export function Header() {
 
@@ -11,16 +12,7 @@ export function Header() {
                     <img src="/images/logo.png" />
                 </Link>
                 
-                <nav>
-                    <Link href="/signin" >
-                        <a>Sign In</a>
-                    </Link>
-
-                    <Link href="/signup" >
-                        <a className={styles.signUp} >Sign Up</a>
-                    </Link>
-
-                </nav>
+                <SignInButton />
             </div>
         </header>
     )

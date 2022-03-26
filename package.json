@@ -9,13 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.4",
+    "@types/xml2js": "^0.4.9",
     "axios": "^0.26.1",
     "next": "12.1.0",
+    "nookies": "^2.5.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.49.9"
+    "react-icons": "^4.3.1",
+    "react-xml-parser": "^1.1.8",
+    "sass": "^1.49.9",
+    "uuid": "^8.3.2",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@types/cookie": "^0.4.1",
     "@types/node": "17.0.21",
     "@types/react": "17.0.40",
     "eslint": "8.11.0",

@@ -1,0 +1,35 @@
+.button {
+    display: flex;
+    align-items: center;
+    height: 3.2rem;
+    padding: 0 2rem;
+
+    gap: 1rem;
+    font-size: 1.2rem;
+
+    background-color: var(--black-1000);
+    color: var(--white-1000);
+    font-weight: 600;
+
+    border-radius: 0.6rem;
+
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.897);
+    transition: .2s;
+}
+
+.googleUnAuthenticated {
+    color: var(--red-500);
+}
+
+.googleAuthenticated {
+    color: var(--green-500);
+}

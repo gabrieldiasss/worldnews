@@ -13,6 +13,9 @@
     --gray-800: #8B8680;
     --gray-600: #D0CDCD;
     --gray-500: #EDEDED;
+
+    --red-500: #D92424;
+    --green-500: #17F348;
 }
 
 @media(max-width: 1080px) {
@@ -35,7 +38,7 @@ body {
     font: 700 1rem "Merriweather";
 }
 
-header, button {
+header, button, label {
     font: 700 1rem "Poppins", sans-serif;
 }
 
@@ -47,5 +50,10 @@ a {
 
 button, img {
     cursor: pointer;
+}
+
+input, button {
+    border: 0;
+    outline: 0;
 }
 
