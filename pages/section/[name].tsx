@@ -38,7 +38,9 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
 export const getStaticPaths: GetStaticPaths = async () => {
 
    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/section-list.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
+
     const data = await response.json()
+
     const results = data.results 
 
     console.log(results)

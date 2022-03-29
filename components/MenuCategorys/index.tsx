@@ -1,34 +1,24 @@
 /* eslint-disable @next/next/link-passhref */
 import axios from "axios"
+import { GetStaticProps } from "next";
 import Link from "next/link";
 import { useEffect, useState } from "react"
+import { Category } from "../../types";
 
 import styles from './styles.module.scss'
 
-interface Category {
-    section: string;
-    display_name: string;
+interface MenuCategorysProps {
+    section: Category[];
 }
 
-export function MenuCategorys() {
-
-    const [categorys, setCategorys] = useState<Category[]>([])
-
-    const [term, setTerm] = useState('everything')
-
-    useEffect(() => {
-        axios.get(`https://api.nytimes.com/svc/news/v3/content/section-list.json?q=${term}&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
-            .then((response) => {
-                setCategorys(response.data.results)
-            })
-    }, [])
+export function MenuCategorys({ section }: MenuCategorysProps) {
 
     return (
         <>
             <nav className={styles.content} >
                 <ul>
-                    {categorys.map((category, key) => (
-                        <Link key={key} href={`/section/${category.section}`} >
+                    {section.map((category, key) => (
+                        <Link key={key} href={`/section/${category.display_name}`} >
                             <li>{category.display_name}</li>
                         </Link>
 
@@ -38,6 +28,8 @@ export function MenuCategorys() {
         </>
     )
 }
+
+
 
 
 

@@ -5,6 +5,8 @@ import axios from 'axios'
 import styles from './home.module.scss'
 import Link from "next/link"
 import { MenuCategorys } from "../components/MenuCategorys"
+import { GetStaticProps } from "next"
+import { Category } from "../types"
 
 interface News {
 	headline: {
@@ -15,12 +17,15 @@ interface News {
 	snippet: string;
 }
 
-export default function Home() {
+interface SectionProps {
+	results: Category[]
+}
+
+export default function Home({ results }: SectionProps) {
 
 	const [term, setTerm] = useState('everything')
 	const [news, setNews] = useState<News[]>([])
 	
-
 	useEffect(() => {
 
 		axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
@@ -42,7 +47,7 @@ export default function Home() {
 				<title>World News</title>
 			</Head>
 
-			<MenuCategorys />
+			<MenuCategorys section={results} />
 
 			<main className={styles.home}>
 
@@ -62,4 +67,21 @@ export default function Home() {
 			</main>
 		</>
 	)
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+
+    const response = await fetch('https://api.nytimes.com/svc/news/v3/content/section-list.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo')
+
+    const data = await response.json()
+
+    const results = data.results
+
+    console.log(results)
+
+    return {
+        props: {
+			results 
+        }
+    }
 }
