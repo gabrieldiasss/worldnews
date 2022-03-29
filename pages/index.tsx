@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import styles from './home.module.scss'
 import Link from "next/link"
+import { MenuCategorys } from "../components/MenuCategorys"
 
 interface News {
 	headline: {
@@ -13,8 +14,6 @@ interface News {
 	lead_paragraph: string;
 	snippet: string;
 }
-
-
 
 export default function Home() {
 
@@ -43,9 +42,11 @@ export default function Home() {
 				<title>World News</title>
 			</Head>
 
-			<main className={styles.home} >
+			<MenuCategorys />
 
-				<h1 className={styles.titleHome} >Últimas notícias</h1>
+			<main className={styles.home}>
+
+				<h1 className={styles.titleHome}>Últimas notícias</h1>
 
 				<section className={styles.news} >
 					{news.map((newValue, key) => (
@@ -59,9 +60,6 @@ export default function Home() {
 					))}
 				</section>
 			</main>
-
-
-
 		</>
 	)
 }
