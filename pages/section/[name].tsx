@@ -1,24 +1,39 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext, PreviewData } from "next"
-import { ParsedUrlQuery } from "querystring";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next"
+import { New } from "../../components/New";
+import { News } from "../../types";
+import styles from './styles.module.scss'
 
 interface SectionProps {
     name: string;
-    display_name: string;
+
+    results: News[];
 }
 
 interface Section {
     section: string;
 }
 
-export default function Section({ name }: SectionProps) {
+export default function Section({ name, results}: SectionProps) {
 
     const section = name
     const capitalized = section[0].toUpperCase() + section.substr(1);
 
     return (
-        <>
+        <main className={styles.container} >
+
             <h1>{capitalized}</h1>
-        </>
+
+            <div className={styles.grid} >
+                
+               {/* <New /> */}
+               {results.map((newValue, key) => (
+                   <div key={key} >
+                       <New newValue={newValue} />
+                    </div>
+               ))}
+            </div>
+
+        </main>
     )
 }
 
@@ -27,23 +42,27 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     const params = context.params!
     const name = params.name
 
+    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/business.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
+    const data = await response.json()
+    const results = data.results
+    
+
     return {
-        props: { 
-            name
-         } 
+        props: {
+            name,
+            results
+        }
     }
 
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
-   const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/section-list.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
+    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/section-list.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
 
     const data = await response.json()
 
-    const results = data.results 
-
-    console.log(results)
+    const results = data.results
 
     const paths = results.map((section: Section) => {
         return {
