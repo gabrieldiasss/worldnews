@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     const params = context.params!
     const name = params.name
 
-    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/business.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
+    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/${name}.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
     const data = await response.json()
     const results = data.results
     
