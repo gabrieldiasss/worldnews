@@ -11,11 +11,13 @@ interface MenuCategorysProps {
 
 export function MenuCategorys({ section }: MenuCategorysProps) {
 
+    console.log(section)
+
     return (
         <>
             <nav className={styles.content} >
                 <ul>
-                    {section.map((category, key) => (
+                    {section?.map((category, key) => (
                         <Link key={key} href={`/section/${category.section}`} >
                             <li>{category.display_name}</li>
                         </Link>

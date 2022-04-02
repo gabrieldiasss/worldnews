@@ -8,7 +8,7 @@ export function Header() {
     return (
         <header className={styles.header} >
             <div className={styles.headerContent}>
-                <Link href="/" >
+                <Link href="/" passHref>
                     <img src="/images/logo.png" />
                 </Link>
                 

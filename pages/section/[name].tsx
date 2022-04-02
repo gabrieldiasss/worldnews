@@ -1,4 +1,5 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next"
+import { GetServerSideProps, GetStaticPropsContext } from "next"
+import { getSession } from "next-auth/react";
 import Head from "next/head";
 import { New } from "../../components/New";
 import { News } from "../../types";
@@ -7,14 +8,19 @@ import styles from './styles.module.scss'
 interface SectionProps {
     name: string;
 
-    results: News[];
+
+    newsSection: {
+        results: News[];
+    }
 }
 
 interface Section {
     section: string;
 }
 
-export default function Section({ name, results }: SectionProps) {
+export default function Section({ name, newsSection }: SectionProps) {
+
+    console.log(newsSection.results)
 
     const section = name
     const capitalized = section[0].toUpperCase() + section.substr(1);
@@ -33,7 +39,7 @@ export default function Section({ name, results }: SectionProps) {
                 <div className={styles.grid} >
 
                     {/* <New /> */}
-                    {results.map((newValue, key) => (
+                    {newsSection.results?.map((newValue, key) => (
                         <div key={key} >
                             <New newValue={newValue} />
                         </div>
@@ -47,43 +53,31 @@ export default function Section({ name, results }: SectionProps) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context: GetStaticPropsContext) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
-    const params = context.params!
-    const name = params.name
+    const session = await getSession({ req })
 
-    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/${name}.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
-    const data = await response.json()
-    const results = data.results
+    console.log(`você está logado ${session}`)
+
+    if(!session) {
+        return {
+            redirect: {
+                destination: "/unauthorized"
+            }
+        }
+    }
+
+    const { name } = params!
+
+    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/${name}.json?q=everything&api-key=${process.env.API_KEY}`)
+
+    const newsSection = await response.json()
 
     return {
         props: {
             name,
-            results
+            newsSection
         }
     }
 
 }
-
-/* export const getStaticPaths: GetStaticPaths = async () => {
-
-    const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/section-list.json?q=everything&api-key=akpDA0BtJxJ3lmIbuog0M6wpKmgVhwVo`)
-
-    const data = await response.json()
-
-    const results = data.results
-
-    const paths = results.map((section: Section) => {
-        return {
-            params: {
-                name: `${section.section}`,
-            }
-        }
-    })
-
-    return {
-        fallback: false,
-        paths,
-    }
-
-} */
