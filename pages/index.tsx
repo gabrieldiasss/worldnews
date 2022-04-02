@@ -1,13 +1,13 @@
 import Head from "next/head"
-import { useEffect, useState } from "react"
-import axios from 'axios'
 
 import styles from './home.module.scss'
 import { MenuCategorys } from "../components/MenuCategorys"
+
 import { GetStaticProps } from "next"
 import { Category, News } from "../types"
-import { New } from "../components/New"
 
+import { New } from "../components/New"
+import Link from "next/link"
 
 interface HomeProps {
 	results: Category[];
@@ -15,7 +15,6 @@ interface HomeProps {
 }
 
 export default function Home({ results, resultsNews }: HomeProps) {
-
 
 	return (
 		<>
@@ -32,6 +31,7 @@ export default function Home({ results, resultsNews }: HomeProps) {
 
 				<section className={styles.news} >
 					{resultsNews.map((newValue, key) => (
+						// eslint-disable-next-line @next/next/link-passhref
 						<New key={key} newValue={newValue} />
 					))}
 				</section>

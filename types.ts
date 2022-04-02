@@ -9,4 +9,7 @@ export interface News {
 
     title: string;
     abstract?: string;
+    byline: string;
+    published_date: string;
+    url: string;
 }
