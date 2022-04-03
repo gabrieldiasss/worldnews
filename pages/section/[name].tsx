@@ -56,13 +56,13 @@ export default function Section({ name, newsSection }: SectionProps) {
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
 
     const session = await getSession({ req })
-
     const { name } = params!
 
     if(!session) {
         return {
             redirect: {
-                destination: "/unauthorized"
+                destination: "/unauthorized",
+                permanent: false
             }
         }
     } 

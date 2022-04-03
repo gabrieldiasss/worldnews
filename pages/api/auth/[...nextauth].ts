@@ -56,6 +56,14 @@ export default NextAuth({
                 return false
             }
         }
-    }
+    },
+
+    session: {
+        strategy: "jwt"
+    },
+
+   jwt: {
+       secret: process.env.JWT_TOKEN, 
+   }
 
 })
