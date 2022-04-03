@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
 
     const session = await getSession({ req })
 
-    console.log(`você está logado ${session}`)
+    const { name } = params!
 
     if(!session) {
         return {
@@ -65,9 +65,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, params }) =>
                 destination: "/unauthorized"
             }
         }
-    }
-
-    const { name } = params!
+    } 
 
     const response = await fetch(`https://api.nytimes.com/svc/news/v3/content/nyt/${name}.json?q=everything&api-key=${process.env.API_KEY}`)
 
