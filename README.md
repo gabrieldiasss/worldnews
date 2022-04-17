@@ -15,10 +15,10 @@ Esse é meu primeiro projeto (feito sozinho) com NextJS! Apesar de ser um projet
 Para a construção desse projeto eu consumi a api da The New York Times, no qual eles disponibilizam uma api publica das informações das notícias.
 
 Desafios:
-* Para esse projeto eu reforcei meus conhecimentos de SSR e SSG
-* usei as Api routes,
-* Autenticação com o provedor do Google (utilizando NextAuth),
-* usei conceito de serverless com FaunaDB para cadastrar os usuários que se autenticam com seu email,
+* Para esse projeto eu reforcei meus conhecimentos de SSR e SSG.
+* usei as Api routes.
+* Autenticação com o provedor do Google (utilizando NextAuth).
+* usei conceito de serverless com FaunaDB para cadastrar os usuários que se autenticam com seu email.
 * Implementei rotas dinâmicas, com as categorias das notícias.
 
 ### Tecnologias
